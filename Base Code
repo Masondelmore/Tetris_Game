@@ -1,0 +1,61 @@
+#include <windows.h>
+#include <iostream>
+
+using namespace std;
+
+
+void MoveSquare(HDC device_context, int x, int y);
+void DrawSquare(HDC device_context, int x, int y, int width, int height, COLORREF crFillColor);
+void DrawLineH(HDC device_context, int x, int y, int length, COLORREF crFillColor);
+
+int main()
+{
+    int input = 0;
+    int iSquareX = 50, iSquareY = 5, iSquareW = 50, iSquareH = 50;
+
+    // Get window handle to console, and device context
+    HWND console_handle = GetConsoleWindow();
+    HDC device_context = GetDC(console_handle);
+    
+    //DrawSquare(device_context, iSquareX, iSquareY, iSquareW, iSquareH, RGB(255,0,0));
+
+    DrawLineH(device_context, 50, 100, 150, RGB(255,0,0));
+  //  cin >> input;
+  //   MoveSquare(device_context, iSquareX, iSquareY);
+    
+    ReleaseDC(console_handle, device_context);
+    cin.ignore();
+    return 0;
+}
+
+void DrawSquare(HDC device_context, int x, int y, int width, int height, COLORREF crFillColor)
+{
+    for (int i = x; i < x+ width; i++)
+    {
+        for (int j = y; j < y+ height; j++)
+        {
+            SetPixel(device_context, i, j, crFillColor);
+        }
+    }
+}
+
+void DrawLineH(HDC device_context, int x, int y, int length, COLORREF crFillColor)
+{
+    for (int i = x; i < length; i++)
+    {
+        SetPixel(device_context, i, y, crFillColor);
+    }
+   
+}
+
+void MoveSquare(HDC device_context, int x, int y)
+{
+    for (int i = 0; i < 50; i++)
+    {
+  //      DrawSquare(device_context, x, y, RGB(0, 0, 0));
+        y = y + 2;
+ //       DrawSquare(device_context, x, y, RGB(0, 255, 0));
+
+        Sleep(500);
+    }
+}
